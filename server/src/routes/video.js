@@ -15,6 +15,7 @@ router.get("/:id", requireAuth, (req, res) => {
   const stat = fs.statSync(filePath);
   const fileSize = stat.size;
   const range = req.headers.range;
+  
 
   res.setHeader("Accept-Ranges", "bytes");
 
