@@ -15,7 +15,7 @@ router.get("/:id", requireAuth, (req, res) => {
   const stat = fs.statSync(filePath);
   const fileSize = stat.size;
   const range = req.headers.range;
-  
+
 
   res.setHeader("Accept-Ranges", "bytes");
 
@@ -28,6 +28,8 @@ router.get("/:id", requireAuth, (req, res) => {
       res.status(416).setHeader("Content-Range", `bytes */${fileSize}`);
       return res.end();
     }
+    
+    //test
 
     const chunkSize = end - start + 1;
 
