@@ -2,6 +2,7 @@
 
 import { FormEvent, useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
+import { apiUrl, getAuthHeaders } from '@/lib/api';
 
 type FormState = {
   firstName: string;
@@ -30,7 +31,7 @@ export default function ProfileForm() {
   useEffect(() => {
     async function loadMe() {
       try {
-        const res = await fetch('http://localhost:4000/api/auth/me', {
+        const res = await fetch(apiUrl('/api/auth/me'), {
           credentials: 'include',
           headers: getAuthHeaders(),
         });
@@ -66,7 +67,7 @@ export default function ProfileForm() {
     setMessage('');
     setError('');
     try {
-      const res = await fetch('http://localhost:4000/api/auth/profile', {
+      const res = await fetch(apiUrl('/api/auth/profile'), {
         method: 'PUT',
         credentials: 'include',
         headers: {
@@ -114,12 +115,6 @@ export default function ProfileForm() {
       </div>
     </div>
   );
-}
-
-function getAuthHeaders() {
-  if (typeof window === 'undefined') return {};
-  const token = localStorage.getItem('token');
-  return token ? { Authorization: `Bearer ${token}` } : {};
 }
 
 type FieldProps = {

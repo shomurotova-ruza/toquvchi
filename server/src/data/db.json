@@ -1,17 +1,5 @@
 {
-  "users": [
-    {
-      "id": "58dcc293-e82d-478f-a62a-471bd92ea736",
-      "createdAt": "2026-04-03T12:19:29.870Z",
-      "updatedAt": "2026-04-03T12:20:38.157Z",
-      "firstName": "Roza",
-      "lastName": "Shomurotova",
-      "phone": "324234 234234",
-      "address": "test",
-      "email": "test@gmail.com",
-      "passwordHash": "$2b$10$ECx4gwD.lFqsEc9zkMwkZ.oLSVrl8yxyRc21eD0y0J4WtZz4JgWRy"
-    }
-  ],
+  "users": [],
   "lessons": [
     {
       "id": "b1",

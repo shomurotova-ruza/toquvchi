@@ -5,6 +5,7 @@ import { useEffect, useMemo, useRef, useState } from "react";
 import { Expand, Play, X } from "lucide-react";
 import AppShell from "@/components/AppShell";
 import { categoryInfo, fallbackLessons, type Lesson } from "@/lib/site-data";
+import { apiUrl } from "@/lib/api";
 
 type Props = { id: string };
 
@@ -36,7 +37,7 @@ export default function LessonPageClient({ id }: Props) {
     async function load() {
       setLoading(true);
       try {
-        const res = await fetch(`http://localhost:4000/api/lessons/${id}`, {
+        const res = await fetch(apiUrl(`/api/lessons/${id}`), {
           credentials: "include",
           cache: "no-store",
         });
@@ -61,7 +62,7 @@ export default function LessonPageClient({ id }: Props) {
   }, [authReady, id]);
 
   const active = useMemo(() => lesson?.category, [lesson]);
-  const videoSrc = lesson ? `http://localhost:4000/api/video/${lesson.videoId}?token=${encodeURIComponent(token)}` : "";
+  const videoSrc = lesson ? `${apiUrl(`/api/video/${lesson.videoId}`)}?token=${encodeURIComponent(token)}` : "";
 
   async function openFullscreen() {
     const video = videoRef.current as (HTMLVideoElement & {

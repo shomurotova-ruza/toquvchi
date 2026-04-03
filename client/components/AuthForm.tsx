@@ -2,14 +2,13 @@
 
 import { useRouter, useSearchParams } from "next/navigation";
 import { FormEvent, useMemo, useState } from "react";
+import { apiUrl } from "@/lib/api";
 
 type Mode = "login" | "register";
 
 type Props = { mode: Mode };
 
 type Errors = Record<string, string>;
-
-const API = "http://localhost:4000/api/auth";
 
 export default function AuthForm({ mode }: Props) {
   const isRegister = mode === "register";
@@ -65,7 +64,7 @@ export default function AuthForm({ mode }: Props) {
     setLoading(true);
 
     try {
-      const endpoint = isRegister ? `${API}/register` : `${API}/login`;
+      const endpoint = isRegister ? apiUrl("/api/auth/register") : apiUrl("/api/auth/login");
       const payload = isRegister
         ? {
             firstName: form.firstName.trim(),

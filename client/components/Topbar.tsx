@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { Heart, Search, ShoppingBag } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { FormEvent, useEffect, useState } from 'react';
+import { apiUrl } from '@/lib/api';
 
 type Props = {
   initialValue?: string;
@@ -30,7 +31,7 @@ export default function Topbar({ initialValue = '' }: Props) {
 
   async function logout() {
     try {
-      await fetch('http://localhost:4000/api/auth/logout', {
+      await fetch(apiUrl('/api/auth/logout'), {
         method: 'POST',
         credentials: 'include',
       });

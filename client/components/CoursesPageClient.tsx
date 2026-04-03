@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import AppShell from "@/components/AppShell";
 import { categoryInfo, fallbackLessons, getCategoryFromSearch, type Lesson } from "@/lib/site-data";
+import { apiUrl } from "@/lib/api";
 
 type Props = {
   catParam?: string | null;
@@ -26,7 +27,7 @@ export default function CoursesPageClient({ catParam, queryParam }: Props) {
         const params = new URLSearchParams();
         if (category) params.set("cat", category);
         if (queryParam?.trim()) params.set("q", queryParam.trim());
-        const res = await fetch(`http://localhost:4000/api/lessons?${params.toString()}`, {
+        const res = await fetch(`${apiUrl("/api/lessons")}?${params.toString()}`, {
           credentials: "include",
           cache: "no-store",
         });
