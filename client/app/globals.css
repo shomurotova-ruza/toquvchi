@@ -1,8 +1,8 @@
 @import url("https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inter:wght@400;500;600;700;800&display=swap");
 
 :root {
-  --page-bg: linear-gradient(180deg, #f9eff8 0%, #f3e8ff 55%, #efe7fb 100%);
-  --frame-bg: #fff7fc;
+  --page-bg: #000000;
+  --frame-bg: #f8f0f7;
   --purple: #b14acb;
   --purple-strong: #8f3db2;
   --purple-soft: #efc8f8;
