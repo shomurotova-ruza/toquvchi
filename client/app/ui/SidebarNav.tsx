@@ -41,7 +41,7 @@ export default function SidebarNav() {
 
         <div className="contact-chip">
           <Mail size={18} />
-          <span>example@gmail.com</span>
+          <span>info@toquvchi.com</span>
         </div>
 
         <div className="contact-chip">

@@ -647,3 +647,118 @@ button, input { font: inherit; }
 .bottom-contact-bar {
   align-items: center;
 }
+
+
+.lesson-open-box {
+  background: rgba(255,255,255,0.55);
+}
+
+.open-video-btn {
+  min-width: 180px;
+}
+
+.video-modal {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  z-index: 9999;
+}
+
+.video-modal-card {
+  width: min(920px, 96vw);
+  background: var(--frame-bg);
+  border-radius: 18px;
+  padding: 18px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.25);
+}
+
+.video-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  margin-bottom: 12px;
+  color: var(--purple-strong);
+}
+
+.icon-close-btn {
+  width: 38px;
+  height: 38px;
+  border-radius: 999px;
+  border: 1px solid var(--border);
+  background: white;
+  color: var(--purple-strong);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.user-mini-panel {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-right: 8px;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+}
+
+.user-mini-panel.guest {
+  margin-right: 12px;
+}
+
+.user-mini-name {
+  font-size: 13px;
+  color: #7c3f9d;
+  font-weight: 700;
+  max-width: 180px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.top-mini-link {
+  border: 1px solid #b766ff;
+  color: #8f35e7;
+  background: #fff;
+  border-radius: 14px;
+  padding: 6px 10px;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.top-mini-link.logout {
+  font-family: inherit;
+}
+
+.video-open-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+
+.video-open-link:hover {
+  border-color: #c76ce4;
+  background: #f3e6f6;
+}
+
+.video-open-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 170px;
+  padding: 12px 22px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #df7bd8, #b97bff);
+  color: #fff;
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1;
+}

@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
-import { Expand, Play } from "lucide-react";
+import { Expand, Play, X } from "lucide-react";
 import AppShell from "@/components/AppShell";
 import { categoryInfo, fallbackLessons, type Lesson } from "@/lib/site-data";
 
@@ -13,16 +13,19 @@ export default function LessonPageClient({ id }: Props) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [authReady, setAuthReady] = useState(false);
+  const [token, setToken] = useState("");
+  const [openVideo, setOpenVideo] = useState(false);
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (!token) {
+    const savedToken = localStorage.getItem("token") || "";
+    if (!savedToken) {
       setError("Video ko‘rish uchun avval tizimga kiring.");
       setAuthReady(false);
       setLoading(false);
       return;
     }
+    setToken(savedToken);
     setAuthReady(true);
   }, []);
 
@@ -58,9 +61,14 @@ export default function LessonPageClient({ id }: Props) {
   }, [authReady, id]);
 
   const active = useMemo(() => lesson?.category, [lesson]);
+  const videoSrc = lesson ? `http://localhost:4000/api/video/${lesson.videoId}?token=${encodeURIComponent(token)}` : "";
 
   async function openFullscreen() {
-    const video = videoRef.current as (HTMLVideoElement & { webkitEnterFullscreen?: () => void; webkitRequestFullscreen?: () => Promise<void> | void; msRequestFullscreen?: () => Promise<void> | void; }) | null;
+    const video = videoRef.current as (HTMLVideoElement & {
+      webkitEnterFullscreen?: () => void;
+      webkitRequestFullscreen?: () => Promise<void> | void;
+      msRequestFullscreen?: () => Promise<void> | void;
+    }) | null;
     if (!video) return;
     try {
       if (video.requestFullscreen) {
@@ -79,9 +87,9 @@ export default function LessonPageClient({ id }: Props) {
         video.webkitEnterFullscreen();
         return;
       }
-      setError('Bu brauzerda full screen qo‘llanmaydi.');
+      setError("Bu brauzerda full screen qo‘llanmaydi.");
     } catch {
-      setError('Full screen rejimi ochilmadi.');
+      setError("Full screen rejimi ochilmadi.");
     }
   }
 
@@ -111,24 +119,43 @@ export default function LessonPageClient({ id }: Props) {
 
           {error ? <div className="message error">{error}</div> : null}
 
-          <div className="player-card">
-            <video
-              ref={videoRef}
-              className="lesson-video"
-              controls
-              preload="metadata"
-              src={`http://localhost:4000/api/video/${lesson.videoId}?token=${encodeURIComponent(localStorage.getItem('token') || '')}`}
-              crossOrigin="use-credentials"
-            />
-            <div className="player-actions">
-              <button className="primary-btn small" type="button" onClick={() => videoRef.current?.play()}>
-                <Play size={16} /> Boshlash
-              </button>
-              <button className="secondary-btn small" type="button" onClick={openFullscreen}>
-                <Expand size={16} /> Full screen
+          {!openVideo ? (
+            <div className="video-placeholder tall lesson-open-box">
+              <button className="primary-btn open-video-btn" type="button" onClick={() => setOpenVideo(true)}>
+                Ochish
               </button>
             </div>
-          </div>
+          ) : (
+            <div className="video-modal">
+              <div className="video-modal-card">
+                <div className="video-modal-header">
+                  <strong>{lesson.title}</strong>
+                  <button className="icon-close-btn" type="button" onClick={() => setOpenVideo(false)}>
+                    <X size={18} />
+                  </button>
+                </div>
+
+                <video
+                  ref={videoRef}
+                  className="lesson-video"
+                  controls
+                  autoPlay
+                  preload="metadata"
+                  src={videoSrc}
+                  crossOrigin="use-credentials"
+                />
+
+                <div className="player-actions">
+                  <button className="primary-btn small" type="button" onClick={() => videoRef.current?.play()}>
+                    <Play size={16} /> Boshlash
+                  </button>
+                  <button className="secondary-btn small" type="button" onClick={openFullscreen}>
+                    <Expand size={16} /> Full screen
+                  </button>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       ) : null}
     </AppShell>

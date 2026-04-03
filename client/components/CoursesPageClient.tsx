@@ -82,7 +82,9 @@ export default function CoursesPageClient({ catParam, queryParam }: Props) {
                 </div>
                 <Link href={`/lesson/${lesson.id}`} className="primary-btn small">Ochish</Link>
               </div>
-              <div className="video-placeholder">video</div>
+              <Link href={`/lesson/${lesson.id}`} className="video-placeholder video-open-link">
+                <span className="video-open-badge">Videoni ko‘rish</span>
+              </Link>
             </article>
           ))}
         </div>

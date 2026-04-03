@@ -110,7 +110,8 @@ export default function AuthForm({ mode }: Props) {
       setSuccessMessage(success);
 
       setTimeout(() => {
-        router.replace(isRegister ? "/login" : nextUrl);
+        router.replace(nextUrl);
+        router.refresh();
       }, 700);
     } catch {
       setServerMessage("Serverga ulanib bo‘lmadi. Backend ishlayotganini tekshiring.");

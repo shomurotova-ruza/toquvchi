@@ -36,6 +36,11 @@ function makeId() {
   return crypto.randomUUID ? crypto.randomUUID() : `${Date.now()}-${Math.random().toString(16).slice(2)}`;
 }
 
+function getUserById(id) {
+  const db = readDb();
+  return db.users.find((user) => user.id === id) || null;
+}
+
 function findUserByEmail(email) {
   const db = readDb();
   return db.users.find((user) => user.email === email.toLowerCase()) || null;
@@ -43,16 +48,35 @@ function findUserByEmail(email) {
 
 function createUser(user) {
   const db = readDb();
+  const now = new Date().toISOString();
   const newUser = {
     id: makeId(),
-    createdAt: new Date().toISOString(),
-    updatedAt: new Date().toISOString(),
+    createdAt: now,
+    updatedAt: now,
     ...user,
     email: user.email.toLowerCase(),
   };
   db.users.push(newUser);
   writeDb(db);
   return newUser;
+}
+
+function updateUser(id, updates) {
+  const db = readDb();
+  const index = db.users.findIndex((user) => user.id === id);
+  if (index === -1) return null;
+
+  const current = db.users[index];
+  const nextUser = {
+    ...current,
+    ...updates,
+    email: (updates.email || current.email).toLowerCase(),
+    updatedAt: new Date().toISOString(),
+  };
+
+  db.users[index] = nextUser;
+  writeDb(db);
+  return nextUser;
 }
 
 function getLessons({ cat, level, q }) {
@@ -75,8 +99,10 @@ module.exports = {
   ensureDb,
   readDb,
   writeDb,
+  getUserById,
   findUserByEmail,
   createUser,
+  updateUser,
   getLessons,
   getLessonById,
   defaultData,

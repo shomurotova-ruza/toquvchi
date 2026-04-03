@@ -1,17 +1,46 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { Heart, Search, ShoppingBag } from 'lucide-react';
 import { useRouter } from 'next/navigation';
-import { FormEvent, useState } from 'react';
+import { FormEvent, useEffect, useState } from 'react';
 
 type Props = {
   initialValue?: string;
 };
 
+type User = {
+  firstName?: string;
+  lastName?: string;
+  email?: string;
+};
+
 export default function Topbar({ initialValue = '' }: Props) {
   const router = useRouter();
   const [term, setTerm] = useState(initialValue);
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    try {
+      const raw = localStorage.getItem('user');
+      if (raw) setUser(JSON.parse(raw));
+    } catch {}
+  }, []);
+
+  async function logout() {
+    try {
+      await fetch('http://localhost:4000/api/auth/logout', {
+        method: 'POST',
+        credentials: 'include',
+      });
+    } catch {}
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    setUser(null);
+    router.push('/login');
+    router.refresh();
+  }
 
   function onSubmit(e: FormEvent) {
     e.preventDefault();
@@ -22,6 +51,8 @@ export default function Topbar({ initialValue = '' }: Props) {
     }
     router.push(`/courses?q=${encodeURIComponent(value)}`);
   }
+
+  const displayName = user?.firstName ? `${user.firstName}${user?.lastName ? ` ${user.lastName}` : ''}` : '';
 
   return (
     <header className="topbar">
@@ -46,6 +77,18 @@ export default function Topbar({ initialValue = '' }: Props) {
         </form>
 
         <div className="topbar-actions">
+          {user ? (
+            <div className="user-mini-panel">
+              <span className="user-mini-name">{displayName}</span>
+              <Link href="/profile" className="top-mini-link">Profil</Link>
+              <button className="top-mini-link logout" type="button" onClick={logout}>Chiqish</button>
+            </div>
+          ) : (
+            <div className="user-mini-panel guest">
+              <Link href="/login" className="top-mini-link">Kirish</Link>
+              <Link href="/register" className="top-mini-link">Ro‘yxatdan o‘tish</Link>
+            </div>
+          )}
           <button className="icon-btn" type="button" title="Sevimlilar">
             <Heart size={24} />
           </button>
