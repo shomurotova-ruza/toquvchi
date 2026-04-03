@@ -68,7 +68,7 @@ export const homeCards = [
 
 export const contactItems = [
   { label: "123456777", href: "tel:+998123456777", icon: "☎" },
-  { label: "shomurotova.ruza@gmail.com", href: "mailto:shomurotova.ruza@gmail.com", icon: "✉" },
+  { label: "info@toquvchi.com", href: "mailto:shomurotova.ruza@gmail.com", icon: "✉" },
   { label: "Telegram", href: "https://t.me/", icon: "➤" },
   { label: "Instagram", href: "https://instagram.com/", icon: "◎" },
 ];

@@ -86,7 +86,7 @@ export default function LessonPageClient({ id }: Props) {
   }
 
   return (
-    <AppShell active={active}>
+    <AppShell active={active} pageTitle={lesson?.title || "Dars"}>
       {!authReady ? (
         <div className="form-card narrow">
           <div className="message error">{error || "Avval login qiling."}</div>
@@ -105,7 +105,6 @@ export default function LessonPageClient({ id }: Props) {
 
       {authReady && !loading && lesson ? (
         <div className="lesson-page-block">
-          <h1 className="page-title">{lesson.title}</h1>
           <p className="page-subtitle">
             {categoryInfo[lesson.category].title} • {lesson.level} • {lesson.duration}
           </p>

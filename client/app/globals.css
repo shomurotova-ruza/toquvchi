@@ -39,6 +39,7 @@ button, input { font: inherit; }
   min-height: calc(100vh - 28px);
   background: var(--frame-bg);
   overflow: hidden;
+  border-radius: 0;
 }
 
 .topbar-gradient {
@@ -109,8 +110,8 @@ button, input { font: inherit; }
 
 .content-grid {
   display: grid;
-  grid-template-columns: 250px 1fr;
-  gap: 28px;
+  grid-template-columns: 230px 1fr;
+  gap: 22px;
   padding: 8px 28px 28px;
 }
 
@@ -124,16 +125,16 @@ button, input { font: inherit; }
 .brand-wrap { margin-top: 10px; }
 .brand-title {
   font-family: "Great Vibes", cursive;
-  font-size: 70px;
+  font-size: 56px;
   color: var(--purple);
-  line-height: 0.95;
+  line-height: 1;
 }
 
 .sidebar-menu {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  margin-top: 30px;
+  gap: 12px;
+  margin-top: 34px;
 }
 
 .menu-link {
@@ -151,7 +152,7 @@ button, input { font: inherit; }
 .sidebar-contacts {
   display: grid;
   gap: 12px;
-  margin-top: 30px;
+  margin-top: 34px;
 }
 
 .contact-chip,
@@ -180,7 +181,7 @@ button, input { font: inherit; }
   margin: 0;
   color: var(--purple-strong);
   font-family: "Great Vibes", cursive;
-  font-size: 62px;
+  font-size: 56px;
   font-weight: 400;
   line-height: 1.05;
 }
@@ -195,13 +196,18 @@ button, input { font: inherit; }
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 56px;
-  margin-top: 22px;
+  margin-top: 10px;
+  align-items: start;
 }
 
 .home-card {
-  background: #f5d9ef;
-  padding: 18px 18px 20px;
+  background: #f1d7f0;
+  padding: 18px 18px 16px;
   box-shadow: var(--shadow);
+  min-height: 316px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .home-card-image {
@@ -235,18 +241,18 @@ button, input { font: inherit; }
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 8px;
+  gap: 12px;
   cursor: pointer;
 }
 
 .home-card-button {
-  margin: 16px auto 0;
+  margin: 14px auto 0;
   background: var(--white);
-  min-height: 40px;
+  min-height: 42px;
   padding: 0 18px;
   color: var(--purple);
   font-family: "Great Vibes", cursive;
-  font-size: 24px;
+  font-size: 22px;
 }
 
 .bottom-contact-bar {
@@ -447,4 +453,197 @@ button, input { font: inherit; }
   .bottom-contact-bar { grid-template-columns: 1fr; }
   .lesson-card-top { flex-direction: column; align-items: flex-start; }
   .contact-large-chip { font-size: 18px; }
+}
+
+
+.topbar-gradient {
+  height: 39px;
+  background: var(--gradient);
+  position: relative;
+}
+
+.topbar-logo-wrap {
+  position: absolute;
+  left: 26px;
+  top: 0;
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.topbar-logo {
+  object-fit: contain;
+}
+
+.content-grid-home {
+  grid-template-columns: 220px 1fr;
+  gap: 26px;
+  padding-top: 4px;
+}
+
+.main-content-home {
+  padding-top: 18px;
+}
+
+.desired-home-grid {
+  margin-top: 8px;
+  gap: 56px;
+}
+
+.desired-home-card {
+  background: #e9d1ea;
+  padding: 18px 20px 16px;
+  box-shadow: 0 4px 14px rgba(0,0,0,0.10);
+  min-height: 318px;
+}
+
+.desired-home-image {
+  min-height: 158px;
+  background: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-real-image {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  border-radius: 18px;
+}
+
+.card-real-image.crochet {
+  max-width: 170px;
+}
+
+.desired-home-button {
+  margin-top: 14px;
+  min-height: 38px;
+  padding: 0 26px;
+  min-width: 232px;
+  text-align: center;
+  font-size: 18px;
+  font-family: 'Inter', sans-serif;
+  font-weight: 800;
+  background: #fff;
+  color: #7d2df1;
+  white-space: nowrap;
+}
+
+.desired-contact-bar {
+  margin-top: 76px;
+  padding: 38px 24px;
+}
+
+.bottom-chip {
+  min-height: 42px;
+  background: var(--white);
+  color: #222;
+  font-weight: 700;
+}
+
+.sidebar {
+  min-height: 640px;
+}
+
+.brand-wrap {
+  margin-top: 18px;
+}
+
+.brand-title {
+  font-size: 58px;
+  line-height: 1;
+}
+
+.sidebar-menu {
+  gap: 12px;
+  margin-top: 46px;
+}
+
+.menu-link {
+  padding: 7px 18px;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.topbar-inner {
+  padding-top: 12px;
+}
+
+.page-title {
+  display: block;
+}
+
+.hero-title-wrap {
+  display: block;
+}
+
+@media (max-width: 1100px) {
+  .content-grid-home {
+    grid-template-columns: 1fr;
+  }
+
+  .main-content-home {
+    padding-top: 10px;
+  }
+
+  .desired-home-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+
+.brand-wrap {
+  margin-top: 18px;
+  width: 100%;
+  overflow: visible;
+}
+
+.brand-title {
+  display: inline-block;
+  white-space: nowrap;
+  letter-spacing: 0;
+}
+
+.hero-title-wrap-home {
+  margin-top: 2px;
+  margin-bottom: 20px;
+}
+
+.auth-title-wrap {
+  margin-top: 0;
+  margin-bottom: 8px;
+}
+
+.page-subtitle {
+  margin: 0 0 18px;
+}
+
+.form-card {
+  padding-top: 4px;
+}
+
+.desired-home-card {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.desired-home-image .card-real-image.beginner {
+  max-width: 210px;
+}
+
+.desired-home-image .card-real-image.crochet {
+  max-width: 175px;
+}
+
+.desired-home-image .card-real-image.knitting {
+  max-width: 190px;
+}
+
+.bottom-contact-bar {
+  align-items: center;
 }

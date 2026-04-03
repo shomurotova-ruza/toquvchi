@@ -67,7 +67,7 @@ export default function CoursesClient() {
 
             <div className="bottom-contact-bar">
               <div className="bottom-chip">123456777</div>
-              <div className="bottom-chip">shomurotova.ruza@gmail.com</div>
+              <div className="bottom-chip">info@toquvchi.com</div>
               <div className="bottom-chip">Telegram</div>
               <div className="bottom-chip">Instagram</div>
             </div>

@@ -61,11 +61,8 @@ export default function CoursesPageClient({ catParam, queryParam }: Props) {
   const visibleLessons = useMemo(() => lessons, [lessons]);
 
   return (
-    <AppShell active={activeKey} initialSearch={queryParam ?? ""}>
-      <div className="hero-title-wrap">
-        <h1 className="page-title">{title}</h1>
-        {!category && !queryParam ? <p className="page-subtitle">Kerakli darsni tanlang.</p> : null}
-      </div>
+    <AppShell active={activeKey} initialSearch={queryParam ?? ""} pageTitle={title}>
+      {!category && !queryParam ? <p className="page-subtitle">Kerakli darsni tanlang.</p> : null}
 
       {error ? <div className="message error">{error}</div> : null}
       {loading ? <div className="video-placeholder tall">Yuklanmoqda...</div> : null}

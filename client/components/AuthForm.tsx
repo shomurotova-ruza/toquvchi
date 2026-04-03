@@ -122,7 +122,9 @@ export default function AuthForm({ mode }: Props) {
   return (
     <div className="form-page">
       <div className="form-card">
-        <h1 className="page-title center">{title}</h1>
+        <div className="hero-title-wrap auth-title-wrap">
+          <h1 className="page-title center">{title}</h1>
+        </div>
 
         <form className="auth-form" onSubmit={onSubmit} noValidate>
           {isRegister ? (
