@@ -14,7 +14,6 @@ export default function LessonPageClient({ id }: Props) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [authReady, setAuthReady] = useState(false);
-  const [token, setToken] = useState("");
   const [openVideo, setOpenVideo] = useState(false);
   const videoRef = useRef<HTMLVideoElement | null>(null);
 
@@ -26,7 +25,6 @@ export default function LessonPageClient({ id }: Props) {
       setLoading(false);
       return;
     }
-    setToken(savedToken);
     setAuthReady(true);
   }, []);
 
@@ -62,7 +60,7 @@ export default function LessonPageClient({ id }: Props) {
   }, [authReady, id]);
 
   const active = useMemo(() => lesson?.category, [lesson]);
-  const videoSrc = lesson ? `${apiUrl(`/api/video/${lesson.videoId}`)}?token=${encodeURIComponent(token)}` : "";
+  const videoSrc = lesson ? apiUrl(`/api/video/${lesson.videoId}`) : "";
 
   async function openFullscreen() {
     const video = videoRef.current as (HTMLVideoElement & {

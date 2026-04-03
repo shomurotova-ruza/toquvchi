@@ -1,28 +1,5 @@
 {
-  "users": [
-    {
-      "id": "fcd90811-8632-432c-92cc-4f2ff50a44b6",
-      "createdAt": "2026-04-03T17:22:22.001Z",
-      "updatedAt": "2026-04-03T17:22:22.001Z",
-      "firstName": "Roza",
-      "lastName": "Shomurotova",
-      "phone": "775 553 553",
-      "address": "test",
-      "email": "test@gmail.com",
-      "passwordHash": "$2b$10$649Tc8RYZg4.YepqAXN.yemqRLNsSaltV17dGKGeJA7UVuGjFcRvi"
-    },
-    {
-      "id": "d755f543-ec30-435d-bc24-703fde580d57",
-      "createdAt": "2026-04-03T17:25:33.122Z",
-      "updatedAt": "2026-04-03T17:26:03.866Z",
-      "firstName": "Roza",
-      "lastName": "Shomurotva",
-      "phone": "664665665",
-      "address": "test",
-      "email": "test@google.com",
-      "passwordHash": "$2b$10$KIJP53rboHe1DoTonl3tKuN1jul65uny/VLPbyDSOvlJDmeniVXQi"
-    }
-  ],
+  "users": [],
   "lessons": [
     {
       "id": "b1",

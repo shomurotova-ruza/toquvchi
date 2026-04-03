@@ -18,6 +18,7 @@ const menuItems = [
 ];
 
 export default function SidebarNav({ active, showContacts = false }: Props) {
+  const cat = typeof window !== "undefined" ? new URLSearchParams(window.location.search).get("cat") : null;
 
   return (
     <aside className="sidebar">
@@ -30,7 +31,7 @@ export default function SidebarNav({ active, showContacts = false }: Props) {
           {menuItems.map((item) => {
             const isActive = active
               ? active === item.key
-              : false;
+              : item.key === cat;
 
             return (
               <Link key={item.key} href={item.href} className={`menu-link ${isActive ? "active" : ""}`.trim()}>

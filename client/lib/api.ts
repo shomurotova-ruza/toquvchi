@@ -1,8 +1,8 @@
-export const API_BASE =
-  process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, '') || 'http://localhost:4000';
+export const API_BASE = (process.env.NEXT_PUBLIC_API_URL?.replace(/\/$/, '') || '');
 
 export function apiUrl(path: string) {
-  return `${API_BASE}${path.startsWith('/') ? path : `/${path}`}`;
+  const cleanPath = path.startsWith('/') ? path : `/${path}`;
+  return `${API_BASE}${cleanPath}`;
 }
 
 export function getAuthHeaders(): Record<string, string> {

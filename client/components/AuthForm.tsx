@@ -14,6 +14,12 @@ export default function AuthForm({ mode }: Props) {
   const isRegister = mode === "register";
   const router = useRouter();
   const [nextUrl, setNextUrl] = useState("/");
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const params = new URLSearchParams(window.location.search);
+    setNextUrl(params.get("next") || "/");
+  }, []);
   const [form, setForm] = useState({
     firstName: "",
     lastName: "",
@@ -27,12 +33,6 @@ export default function AuthForm({ mode }: Props) {
   const [serverMessage, setServerMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    const params = new URLSearchParams(window.location.search);
-    setNextUrl(params.get("next") || "/");
-  }, []);
 
   const title = useMemo(() => (isRegister ? "Ro‘yxatdan o‘tish" : "Kirish"), [isRegister]);
 
@@ -117,7 +117,7 @@ export default function AuthForm({ mode }: Props) {
         router.refresh();
       }, 700);
     } catch {
-      setServerMessage("Serverga ulanib bo‘lmadi. Backend ishlayotganini tekshiring.");
+      setServerMessage("Serverga ulanib bo‘lmadi.");
     } finally {
       setLoading(false);
     }

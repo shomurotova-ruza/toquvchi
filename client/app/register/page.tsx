@@ -7,6 +7,4 @@ export default function RegisterPage() {
       <AuthForm mode="register" />
     </AppShell>
   );
-  
 }
-
