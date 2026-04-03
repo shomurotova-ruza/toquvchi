@@ -1,7 +1,7 @@
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
-import { FormEvent, useMemo, useState } from "react";
+import { useRouter } from "next/navigation";
+import { FormEvent, useEffect, useMemo, useState } from "react";
 import { apiUrl } from "@/lib/api";
 
 type Mode = "login" | "register";
@@ -13,9 +13,7 @@ type Errors = Record<string, string>;
 export default function AuthForm({ mode }: Props) {
   const isRegister = mode === "register";
   const router = useRouter();
-  const searchParams = useSearchParams();
-
-  const nextUrl = searchParams.get("next") || "/";
+  const [nextUrl, setNextUrl] = useState("/");
   const [form, setForm] = useState({
     firstName: "",
     lastName: "",
@@ -29,6 +27,12 @@ export default function AuthForm({ mode }: Props) {
   const [serverMessage, setServerMessage] = useState("");
   const [successMessage, setSuccessMessage] = useState("");
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const params = new URLSearchParams(window.location.search);
+    setNextUrl(params.get("next") || "/");
+  }, []);
 
   const title = useMemo(() => (isRegister ? "Ro‘yxatdan o‘tish" : "Kirish"), [isRegister]);
 

@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-import { useSearchParams } from "next/navigation";
 import { contactItems } from "@/lib/site-data";
 
 type Props = {
@@ -19,8 +18,6 @@ const menuItems = [
 ];
 
 export default function SidebarNav({ active, showContacts = false }: Props) {
-  const searchParams = useSearchParams();
-  const cat = searchParams.get("cat");
 
   return (
     <aside className="sidebar">
@@ -33,7 +30,7 @@ export default function SidebarNav({ active, showContacts = false }: Props) {
           {menuItems.map((item) => {
             const isActive = active
               ? active === item.key
-              : item.key === cat;
+              : false;
 
             return (
               <Link key={item.key} href={item.href} className={`menu-link ${isActive ? "active" : ""}`.trim()}>
