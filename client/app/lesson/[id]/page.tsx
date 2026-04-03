@@ -2,12 +2,13 @@
 
 import React from "react";
 import { useParams, useRouter } from "next/navigation";
+import AppFrame from "../../ui/AppFrame";
 
 type Lesson = {
   id: string;
   title: string;
   duration: string;
-  level: "Boshlovchi" | "O‘rta" | "Professional";
+  level: string;
 };
 
 const lessons: Lesson[] = [
@@ -23,63 +24,35 @@ export default function LessonPage() {
   const router = useRouter();
   const params = useParams<{ id: string }>();
   const id = params?.id;
-
   const [checked, setChecked] = React.useState(false);
 
   React.useEffect(() => {
     const token = localStorage.getItem("token");
     if (!token) {
-     router.replace(`/login?next=/lesson/${id}`);
+      router.replace(`/login?next=/lesson/${id}`);
       return;
     }
     setChecked(true);
-  }, [router]);
-
-  if (!checked) {
-    return (
-      <div className="max-w-4xl">
-        <div className="mt-6 rounded-3xl border border-purple-100 bg-white p-6 text-slate-700">
-          Login tekshirilmoqda...
-        </div>
-      </div>
-    );
-  }
+  }, [id, router]);
 
   const lesson = lessons.find((l) => l.id === id);
-
-  if (!lesson) {
-    return (
-      <div className="max-w-4xl">
-        <h1 className="text-3xl font-semibold text-purple-800">Dars topilmadi</h1>
-        <a className="mt-4 inline-block text-purple-700" href="/courses">
-          ← Kurslarga qaytish
-        </a>
-      </div>
-    );
-  }
-
-  const videoSrc = `http://localhost:4000/api/video/${lesson.id}`;
+  const videoSrc = `http://localhost:4000/api/video/${lesson?.id}`;
 
   return (
-    <div className="max-w-4xl">
-      <a className="text-purple-700" href="/courses">
-        ← Kurslarga qaytish
-      </a>
-
-      <h1 className="mt-4 text-3xl font-semibold text-purple-800">{lesson.title}</h1>
-      <div className="mt-2 text-slate-600">
-        {lesson.level} • {lesson.duration}
-      </div>
-
-      <div className="mt-6 rounded-3xl border border-purple-100 bg-black overflow-hidden">
-        <video
-  className="w-full aspect-video"
-  controls
-  preload="metadata"
-  crossOrigin="use-credentials"
-  src={videoSrc}
-/>
-      </div>
-    </div>
+    <AppFrame>
+      {!checked ? (
+        <div className="info-box">Login tekshirilmoqda...</div>
+      ) : !lesson ? (
+        <div className="info-box">Dars topilmadi.</div>
+      ) : (
+        <div className="lesson-detail">
+          <h2 className="section-heading left">{lesson.title}</h2>
+          <p className="lesson-subtitle">{lesson.level} • {lesson.duration}</p>
+          <div className="video-player-wrap">
+            <video className="video-player" controls preload="metadata" crossOrigin="use-credentials" src={videoSrc} />
+          </div>
+        </div>
+      )}
+    </AppFrame>
   );
 }
