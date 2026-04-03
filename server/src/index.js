@@ -1,36 +1,37 @@
-require("dotenv").config();
-const cookieParser = require("cookie-parser");
-const express = require("express");
-const cors = require("cors");
-const { connectDB } = require("./db");
-const authRoutes = require("./routes/auth");
+require('dotenv').config();
+const cookieParser = require('cookie-parser');
+const express = require('express');
+const cors = require('cors');
+const { ensureDb } = require('./data/store');
+
+const authRoutes = require('./routes/auth');
+const lessonsRoutes = require('./routes/lessons');
+const videoRoutes = require('./routes/video');
 
 const app = express();
+const port = process.env.PORT || 4000;
+
+ensureDb();
 
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: ['http://localhost:3000', 'http://127.0.0.1:3000'],
     credentials: true,
-    allowedHeaders: ["Content-Type", "Authorization", "Range"],
-    exposedHeaders: ["Content-Range", "Accept-Ranges", "Content-Length"],
+    allowedHeaders: ['Content-Type', 'Authorization', 'Range'],
+    exposedHeaders: ['Content-Range', 'Accept-Ranges', 'Content-Length'],
   })
 );
 app.use(express.json());
 app.use(cookieParser());
 
-app.get("/api/health", (req, res) => res.json({ ok: true }));
+app.get('/api/health', (req, res) => {
+  res.json({ ok: true, message: 'Server ishlayapti' });
+});
 
-app.use("/api/auth", authRoutes);
-app.use("/api/lessons", require("./routes/lessons"));
-app.use("/api/video", require("./routes/video"));
+app.use('/api/auth', authRoutes);
+app.use('/api/lessons', lessonsRoutes);
+app.use('/api/video', videoRoutes);
 
-const port = process.env.PORT || 4000;
-
-connectDB(process.env.MONGO_URI)
-  .then(() => {
-    app.listen(port, () => console.log(`✅ API running: http://localhost:${port}`));
-  })
-  .catch((err) => {
-    console.error("❌ Mongo error:", err);
-    process.exit(1);
-  });
+app.listen(port, () => {
+  console.log(`✅ API running: http://localhost:${port}`);
+});

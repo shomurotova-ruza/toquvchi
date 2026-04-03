@@ -1,16 +1,16 @@
 @import url("https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inter:wght@400;500;600;700;800&display=swap");
 
 :root {
-  --page-bg: #111111;
-  --frame-bg: #ece8eb;
-  --purple: #a020f0;
-  --purple-strong: #8d18eb;
-  --purple-soft: #d9b8ec;
-  --purple-pale: #f0d9fa;
+  --page-bg: linear-gradient(180deg, #f9eff8 0%, #f3e8ff 55%, #efe7fb 100%);
+  --frame-bg: #fff7fc;
+  --purple: #b14acb;
+  --purple-strong: #8f3db2;
+  --purple-soft: #efc8f8;
+  --purple-pale: #fdeefe;
   --text: #232323;
   --white: #ffffff;
-  --shadow: 0 12px 30px rgba(160, 32, 240, 0.12);
-  --gradient: linear-gradient(90deg, #a02ef0, #be5dff);
+  --shadow: 0 16px 36px rgba(177, 74, 203, 0.14);
+  --gradient: linear-gradient(90deg, #e77bd7, #b784ff);
   --border: #d896ff;
 }
 
@@ -67,7 +67,7 @@ button, input { font: inherit; }
   width: 100%;
   height: 28px;
   border: none;
-  background: #ecd4f6;
+  background: #f7dff4;
   padding: 0 64px 0 34px;
   color: var(--purple-strong);
   outline: none;
@@ -199,7 +199,7 @@ button, input { font: inherit; }
 }
 
 .home-card {
-  background: #e5c7f2;
+  background: #f5d9ef;
   padding: 18px 18px 20px;
   box-shadow: var(--shadow);
 }
@@ -388,7 +388,7 @@ button, input { font: inherit; }
   justify-content: center;
   font-size: 34px;
   font-family: Georgia, serif;
-  background: rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.6);
 }
 
 .video-placeholder.tall { min-height: 280px; }
@@ -403,7 +403,7 @@ button, input { font: inherit; }
 .contact-large-chip {
   min-height: 68px;
   padding: 0 28px;
-  background: #d8c0e6;
+  background: #f0d2ee;
   font-size: 20px;
   font-weight: 800;
 }

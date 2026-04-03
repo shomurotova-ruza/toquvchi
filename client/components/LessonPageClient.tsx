@@ -60,13 +60,28 @@ export default function LessonPageClient({ id }: Props) {
   const active = useMemo(() => lesson?.category, [lesson]);
 
   async function openFullscreen() {
-    if (!videoRef.current) return;
+    const video = videoRef.current as (HTMLVideoElement & { webkitEnterFullscreen?: () => void; webkitRequestFullscreen?: () => Promise<void> | void; msRequestFullscreen?: () => Promise<void> | void; }) | null;
+    if (!video) return;
     try {
-      if (videoRef.current.requestFullscreen) {
-        await videoRef.current.requestFullscreen();
+      if (video.requestFullscreen) {
+        await video.requestFullscreen();
+        return;
       }
+      if (video.webkitRequestFullscreen) {
+        await video.webkitRequestFullscreen();
+        return;
+      }
+      if (video.msRequestFullscreen) {
+        await video.msRequestFullscreen();
+        return;
+      }
+      if (video.webkitEnterFullscreen) {
+        video.webkitEnterFullscreen();
+        return;
+      }
+      setError('Bu brauzerda full screen qo‘llanmaydi.');
     } catch {
-      setError("Full screen rejimi ochilmadi.");
+      setError('Full screen rejimi ochilmadi.');
     }
   }
 
@@ -103,7 +118,7 @@ export default function LessonPageClient({ id }: Props) {
               className="lesson-video"
               controls
               preload="metadata"
-              src={`http://localhost:4000/api/video/${lesson.videoId}`}
+              src={`http://localhost:4000/api/video/${lesson.videoId}?token=${encodeURIComponent(localStorage.getItem('token') || '')}`}
               crossOrigin="use-credentials"
             />
             <div className="player-actions">
