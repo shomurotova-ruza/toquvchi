@@ -1,17 +1,21 @@
 import Link from "next/link";
-import AppFrame from "./ui/AppFrame";
-import { categories, contacts } from "./ui/siteData";
+import AppShell from "@/components/AppShell";
+import { contactItems, homeCards } from "@/lib/site-data";
 
 export default function HomePage() {
   return (
-    <AppFrame>
-      <div className="courses-grid home-grid">
-        {categories.map((card) => (
-          <article className="course-card" key={card.key}>
-            <div className="course-image-wrap">
-              <img src={card.image} alt={card.title} className="course-image" />
+    <AppShell active="home">
+      <div className="hero-title-wrap">
+        <h1 className="page-title">Bosh sahifa</h1>
+      </div>
+
+      <div className="home-cards-grid">
+        {homeCards.map((card) => (
+          <article className="home-card" key={card.category}>
+            <div className="home-card-image">
+              <div className="illustration">{card.imageLabel}</div>
             </div>
-            <Link href={card.href} className="course-btn">
+            <Link className="home-card-button" href={card.href}>
               {card.title}
             </Link>
           </article>
@@ -19,11 +23,13 @@ export default function HomePage() {
       </div>
 
       <div className="bottom-contact-bar">
-        <div className="bottom-chip">{contacts.phone}</div>
-        <div className="bottom-chip">{contacts.email}</div>
-        <div className="bottom-chip">{contacts.telegram}</div>
-        <div className="bottom-chip">{contacts.instagram}</div>
+        {contactItems.map((item) => (
+          <a key={item.label} href={item.href} className="bottom-chip" target={item.href.startsWith("http") ? "_blank" : undefined} rel="noreferrer">
+            <span className="contact-icon">{item.icon}</span>
+            <span>{item.label}</span>
+          </a>
+        ))}
       </div>
-    </AppFrame>
+    </AppShell>
   );
 }

@@ -1,15 +1,17 @@
-import AppFrame from "../ui/AppFrame";
-import { contacts } from "../ui/siteData";
+import AppShell from "@/components/AppShell";
+import { contactItems } from "@/lib/site-data";
 
 export default function ContactPage() {
   return (
-    <AppFrame>
-      <div className="contact-list-page">
-        <div className="contact-page-chip">📞 {contacts.phone}</div>
-        <div className="contact-page-chip">✉️ {contacts.email}</div>
-        <div className="contact-page-chip">✈️ {contacts.telegram}</div>
-        <div className="contact-page-chip">📷 {contacts.instagram}</div>
+    <AppShell active="contact">
+      <div className="contact-page">
+        {contactItems.map((item) => (
+          <a key={item.label} href={item.href} className="contact-large-chip" target={item.href.startsWith("http") ? "_blank" : undefined} rel="noreferrer">
+            <span className="contact-icon big">{item.icon}</span>
+            <span>{item.label}</span>
+          </a>
+        ))}
       </div>
-    </AppFrame>
+    </AppShell>
   );
 }

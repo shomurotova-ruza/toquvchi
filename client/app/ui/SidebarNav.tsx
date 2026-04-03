@@ -1,34 +1,18 @@
 "use client";
 
 import Link from "next/link";
-import { usePathname, useSearchParams } from "next/navigation";
+import { Phone, Mail, Send, Camera } from "lucide-react";
 
 const menuItems = [
-  { label: "Bosh sahifa", href: "/", match: (path: string) => path === "/" },
-  { label: "Ro‘yxatdan o‘tish", href: "/register", match: (path: string) => path === "/register" },
-  {
-    label: "Boshlang‘ich bilimlar",
-    href: "/courses?cat=beginner",
-    match: (path: string, cat: string | null) => path === "/courses" && cat === "beginner",
-  },
-  {
-    label: "Kryuchokda to‘qish",
-    href: "/courses?cat=crochet",
-    match: (path: string, cat: string | null) => path === "/courses" && cat === "crochet",
-  },
-  {
-    label: "Spitsda to‘qish",
-    href: "/courses?cat=knitting",
-    match: (path: string, cat: string | null) => path === "/courses" && cat === "knitting",
-  },
-  { label: "Biz bilan bog‘lanish", href: "/contact", match: (path: string) => path === "/contact" },
+  { label: "Bosh sahifa", href: "/" },
+  { label: "Ro‘yxatdan o‘tish", href: "/register" },
+  { label: "Boshlang‘ich bilimlar", href: "/courses?cat=beginner" },
+  { label: "Kryuchokda to‘qish", href: "/courses?cat=crochet" },
+  { label: "Spitsda to‘qish", href: "/courses?cat=knitting" },
+  { label: "Biz bilan bog‘lanish", href: "/contact" },
 ];
 
 export default function SidebarNav() {
-  const pathname = usePathname();
-  const searchParams = useSearchParams();
-  const cat = searchParams.get("cat");
-
   return (
     <aside className="sidebar">
       <div>
@@ -37,15 +21,38 @@ export default function SidebarNav() {
         </div>
 
         <nav className="sidebar-menu">
-          {menuItems.map((item) => {
-            const active = item.match(pathname, cat);
-            return (
-              <Link key={item.href} href={item.href} className={active ? "menu-link active" : "menu-link"}>
-                {item.label}
-              </Link>
-            );
-          })}
+          {menuItems.map((item, index) => (
+            <Link
+              key={item.href + index}
+              href={item.href}
+              className={index === 0 ? "menu-link active" : "menu-link"}
+            >
+              {item.label}
+            </Link>
+          ))}
         </nav>
+      </div>
+
+      <div className="sidebar-contacts">
+        <div className="contact-chip">
+          <Phone size={18} />
+          <span>+998 12 345 67 77</span>
+        </div>
+
+        <div className="contact-chip">
+          <Mail size={18} />
+          <span>example@gmail.com</span>
+        </div>
+
+        <div className="contact-chip">
+          <Send size={18} />
+          <span>Telegram</span>
+        </div>
+
+        <div className="contact-chip">
+          <Camera size={18} />
+          <span>Instagram</span>
+        </div>
       </div>
     </aside>
   );
