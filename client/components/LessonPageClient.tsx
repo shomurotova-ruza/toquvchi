@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useMemo, useRef, useState } from "react";
 import { Expand, Play, X } from "lucide-react";
 import AppShell from "@/components/AppShell";
-import { categoryInfo, fallbackLessons, type Lesson } from "@/lib/site-data";
+import { categoryInfo, categoryThumbnailMap, fallbackLessons, type Lesson } from "@/lib/site-data";
 import { apiUrl } from "@/lib/api";
 
 type Props = { id: string };
@@ -119,7 +119,10 @@ export default function LessonPageClient({ id }: Props) {
           {error ? <div className="message error">{error}</div> : null}
 
           {!openVideo ? (
-            <div className="video-placeholder tall lesson-open-box">
+            <div
+              className={`video-placeholder tall lesson-open-box video-theme-${lesson.category}`}
+              style={{ backgroundImage: `url(${categoryThumbnailMap[lesson.category]})` }}
+            >
               <button className="primary-btn open-video-btn" type="button" onClick={() => setOpenVideo(true)}>
                 Ochish
               </button>

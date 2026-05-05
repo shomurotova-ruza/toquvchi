@@ -66,6 +66,12 @@ export const homeCards = [
   },
 ];
 
+export const categoryThumbnailMap: Record<CategoryKey, string> = {
+  beginner: "/assets/beginner.png",
+  crochet: "/assets/crochet.png",
+  knitting: "/assets/knitting.png",
+};
+
 export const contactItems = [
   { label: "123456777", href: "tel:+998123456777", icon: "☎" },
   { label: "info@toquvchi.com", href: "mailto:info@toquvchi.com", icon: "✉" },

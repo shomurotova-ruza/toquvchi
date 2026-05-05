@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import AppShell from "@/components/AppShell";
-import { categoryInfo, fallbackLessons, getCategoryFromSearch, type Lesson } from "@/lib/site-data";
+import { categoryInfo, categoryThumbnailMap, fallbackLessons, getCategoryFromSearch, type Lesson } from "@/lib/site-data";
 import { apiUrl } from "@/lib/api";
 
 type Props = {
@@ -83,7 +83,11 @@ export default function CoursesPageClient({ catParam, queryParam }: Props) {
                 </div>
                 <Link href={`/lesson/${lesson.id}`} className="primary-btn small">Ochish</Link>
               </div>
-              <Link href={`/lesson/${lesson.id}`} className="video-placeholder video-open-link">
+              <Link
+                href={`/lesson/${lesson.id}`}
+                className={`video-placeholder video-open-link video-theme-${lesson.category}`}
+                style={{ backgroundImage: `url(${categoryThumbnailMap[lesson.category]})` }}
+              >
                 <span className="video-open-badge">Videoni ko‘rish</span>
               </Link>
             </article>
