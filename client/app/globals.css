@@ -49,7 +49,7 @@ button, input { font: inherit; }
 
 .topbar-inner {
   display: grid;
-  grid-template-columns: 80px minmax(320px, 1fr) 110px;
+  grid-template-columns: 80px minmax(320px, 1fr) minmax(290px, auto);
   gap: 24px;
   align-items: center;
   padding: 14px 28px 4px;
@@ -96,8 +96,10 @@ button, input { font: inherit; }
 
 .topbar-actions {
   display: flex;
+  align-items: center;
   justify-content: flex-end;
   gap: 10px;
+  min-width: 0;
 }
 
 .icon-btn {
@@ -703,8 +705,9 @@ button, input { font: inherit; }
   align-items: center;
   gap: 8px;
   margin-right: 8px;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   justify-content: flex-end;
+  min-width: 0;
 }
 
 .user-mini-panel.guest {
@@ -731,6 +734,7 @@ button, input { font: inherit; }
   font-weight: 700;
   text-decoration: none;
   cursor: pointer;
+  white-space: nowrap;
 }
 
 .top-mini-link.logout {
