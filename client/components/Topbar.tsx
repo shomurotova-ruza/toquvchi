@@ -74,7 +74,9 @@ export default function Topbar({ initialValue = '' }: Props) {
             placeholder="izla"
             aria-label="Qidiruv"
           />
-          <button type="submit" className="search-submit">izla</button>
+          <button type="submit" className="search-submit" aria-label="Izlash">
+            <Search size={16} />
+          </button>
         </form>
 
         <div className="topbar-actions">
