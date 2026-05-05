@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { contactItems } from "@/lib/site-data";
 
 type Props = {
@@ -19,6 +20,11 @@ const menuItems = [
 
 export default function SidebarNav({ active, showContacts = false }: Props) {
   const cat = typeof window !== "undefined" ? new URLSearchParams(window.location.search).get("cat") : null;
+  const [isRegistered, setIsRegistered] = useState(false);
+
+  useEffect(() => {
+    setIsRegistered(Boolean(localStorage.getItem("user") || localStorage.getItem("token")));
+  }, []);
 
   return (
     <aside className="sidebar">
@@ -28,7 +34,7 @@ export default function SidebarNav({ active, showContacts = false }: Props) {
         </div>
 
         <nav className="sidebar-menu">
-          {menuItems.map((item) => {
+          {menuItems.filter((item) => !(isRegistered && item.key === "register")).map((item) => {
             const isActive = active
               ? active === item.key
               : item.key === cat;
